@@ -53,10 +53,14 @@ def inject_outliers(df, column_name, num_outliers, std_multiplier):
         mean = df[column_name].mean()
         std = df[column_name].std()
 
-        # Generate outliers
+        # Outliers are drawn around the column mean with a widened spread,
+        # so some land inside the normal range. That overlap is the point:
+        # values that all sat far outside the data would be trivial to
+        # filter back out.
         outliers = np.random.normal(mean, std * std_multiplier, num_outliers)
 
-        # Append outliers to the column
+        # Appended rows carry only the target column; every other column
+        # is empty for those rows, which the CSV shows as blank fields.
         df = pd.concat([df, pd.DataFrame({column_name: outliers})], ignore_index=True)
 
         logging.info(f"Successfully injected {num_outliers} outliers into column '{column_name}'.")
