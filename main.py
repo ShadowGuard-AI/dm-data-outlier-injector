@@ -3,6 +3,7 @@ import logging
 import pandas as pd
 import numpy as np
 import sys
+from pathlib import Path
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -53,6 +54,9 @@ def inject_outliers(df, column_name, num_outliers, std_multiplier):
         mean = df[column_name].mean()
         std = df[column_name].std()
 
+        if std is None or pd.isna(std) or std == 0:
+            raise ValueError(f"No outlier can be drawn from column '{column_name}' because it has no spread: its standard deviation is zero or undefined.")
+
         # Outliers are drawn around the column mean with a widened spread,
         # so some land inside the normal range. That overlap is the point:
         # values that all sat far outside the data would be trivial to
@@ -80,6 +84,10 @@ def main():
     """
     parser = setup_argparse()
     args = parser.parse_args()
+
+    if Path(args.input_file).resolve() == Path(args.output_file).resolve():
+        logging.error("Output file is the same file as the input file. Refusing to overwrite the input in place.")
+        sys.exit(1)
 
     try:
         # Read the input CSV file
