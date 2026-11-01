@@ -47,10 +47,19 @@ def inject_outliers(df, column_name, num_outliers, std_multiplier):
             raise TypeError(f"Column '{column_name}' must be numeric.")
         if num_outliers < 0:
             raise ValueError("Number of outliers must be non-negative.")
+        # Zero is accepted, and a zero request writes the input back
+        # out unchanged while logging a successful injection of zero
+        # outliers. The run did what was asked, but its output is
+        # indistinguishable from a plain copy of the input.
         if std_multiplier <= 0:
             raise ValueError("Standard deviation multiplier must be positive.")
 
         # Calculate mean and standard deviation
+        # Both statistics skip empty cells, and std is the sample
+        # standard deviation (one degree of freedom), so a column with
+        # a single value has an undefined spread and is refused below.
+        # Nothing seeds numpy's generator anywhere in this tool, so
+        # the drawn outliers cannot be reproduced from a run record.
         mean = df[column_name].mean()
         std = df[column_name].std()
 
