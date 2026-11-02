@@ -1,165 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dm Data Outlier Injector: what it is, how it runs, where it stops</title>
-<meta name="description" content="Dm Data Outlier Injector is one of my projects. The README in the repo is short, so this page sticks to what the files themselves show.">
-<style>
-:root {
-  --bg: #e8dec4; --panel: #f4ecd6; --ink: #183636;
-  --mut: #ffffff;
-  --acc: #147a72; --acc2: #c65434;
-  --line: #f4ecd6;
-}
-* { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: var(--ink);
-  font-family: 'Trebuchet MS', sans-serif; line-height: 1.55; }
-code, pre, .mono { font-family: 'Courier New', monospace; }
-a { color: var(--acc2); }
-.hero { padding: 3rem 6vw 1rem; }
-.hero img.banner { width: 100%; height: auto; border: 1px solid var(--line);
-  border-radius: 10px; }
-.logo { width: 92px; height: 92px; border-radius: 18px;
-  border: 1px solid var(--line); }
-h1 { font-size: 2.4rem; margin: 0.4em 0 0.1em; }
-h2 { border-bottom: 2px solid var(--acc); padding-bottom: 0.2em;
-  margin-top: 2em; }
-.lede { font-size: 1.15rem; max-width: 62ch; }
-main { padding: 0 6vw 3rem; max-width: 1180px; margin: 0 auto; }
-.grid { display: grid; gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
-.card { background: var(--panel); border: 1px solid var(--line);
-  border-radius: 12px; padding: 1rem 1.2rem; }
-.card.pop { animation: rise 0.7s ease both; }
-@keyframes rise { from { opacity: 0; transform: translateY(14px); }
-  to { opacity: 1; transform: none; } }
-pre.code { background: #101014; color: #e8e6df; padding: 1rem 1.2rem;
-  border-radius: 12px; overflow-x: auto; font-size: 0.86rem;
-  border-left: 5px solid var(--acc); }
-table { border-collapse: collapse; width: 100%; }
-td, th { border-bottom: 1px solid var(--line); padding: 0.45rem 0.6rem;
-  text-align: left; }
-.shots { display: grid; gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-.shots img { width: 100%; height: auto; border: 1px solid var(--line);
-  border-radius: 10px; background: #f4f1e8; }
-footer { padding: 2rem 6vw; border-top: 1px solid var(--line);
-  color: var(--mut); }
-.rail { display: flex; gap: 1.2rem; align-items: flex-start; }
-.rail nav { position: sticky; top: 1rem; min-width: 180px; }
-@media (max-width: 760px) { .rail { flex-direction: column; }
-  .rail nav { position: static; } }
-@media (prefers-reduced-motion: reduce) {
-  .card.pop { animation: none; } * { scroll-behavior: auto; } }
-</style>
-</head>
-<body class="layout-term">
-<!-- This page exists for dm-data-outlier-injector alone: the layout (terminal-frame),
-     the colors, and the type were picked for this project, not
-     shared with the other project pages. The code block below is
-     copied from the file it names, line for line. If it looks
-     plain, that is because the project is plain, and I would
-     rather the page match the project than dress it up. The one
-     thing I will not do here is oversell: what this project does
-     not do is stated on the page, not hidden from it. -->
-<header class="hero">
-  <img class="logo" src="assets/logo.png" alt="Dm Data Outlier Injector logo">
-  <img class="banner" src="assets/banner.png" alt="">
-  <h1>Dm Data Outlier Injector</h1>
-  <p class="mono"><a href="https://github.com/ShadowGuard-AI/dm-data-outlier-injector">github.com/ShadowGuard-AI/dm-data-outlier-injector</a></p>
-</header>
+<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><title>dm-data-outlier-injector: The Librarian's Date Stamp Ritual</title>
+<style>@font-face{font-family:Caladea;src:url("fonts/Caladea.ttf")}@font-face{font-family:Cabin;src:url("fonts/Cabin.ttf")}
+body{background:#e7dcc0;font-family:Cabin,sans-serif;color:#5a4230;margin:0}main{max-width:920px;margin:0 auto;padding:28px}
+h1,h2,h3{font-family:Caladea,serif;color:#1e3d26}section{background:#faf5e8;padding:18px 22px;margin:16px 0;border:2px solid #1e3d26;border-left:6px solid #2f5d3a}
+img{max-width:100%}.plate{color:#c9a227;font-family:Caladea,serif;font-weight:bold}
+button{background:#faf5e8;color:#26201a;border:3px solid #2f5d3a;padding:14px 26px;font-family:Caladea,serif;font-size:17px;border-radius:46% 46% 8px 8px / 22px 22px 8px 8px;box-shadow:0 0 0 2px #26201a}
+button:hover{color:#000}button:active{transform:translateY(2px)}button:focus{outline:3px solid #c9a227;outline-offset:3px}
+a{color:#1e3d26}a::before{content:"[=] ";color:#2f5d3a}a:hover::before{color:#c9a227}
+.gap{background:#f1e8d2;border:3px solid #26201a;padding:16px 20px;font-size:19px}
+.card{background:#f1e8d2;border:1px solid #d6c6a4;border-left:6px solid #2f5d3a;padding:10px 14px;margin:12px 0}
+label{font-family:Caladea,serif;color:#1e3d26}pre{white-space:pre-wrap;background:#f1e8d2;padding:14px}code{font-family:Cabin,sans-serif}</style></head><body><main>
+<img src="intro-banner.png" alt="Introduction banner: a wooden date stamp at rest on a library desk, blank loan card beside it, one catalogue drawer open behind, tall shelves and a high window, no writing anywhere">
+<h1>dm-data-outlier-injector: The Librarian's Date Stamp Ritual</h1>
+<p>The page is laid out as a returns desk worked from left to right, each plate a task at the desk. Beat one is the quiet desk before opening time: stamp at rest, loan card blank, drawer shut, nothing named. Beat two is the naming: the cabinet label receives the name dm-data-outlier-injector, and the desk becomes the desk for this one job.</p>
+<img src="logo.png" alt="Logo: one date stamp, round wooden handle, gilt ring, flat library green base, dust cream ground patch, repo name below in catalogue lettering"><img src="banner.png" alt="Wordmark banner: the returns desk in the morning, date stamp at the desk edge, open catalogue drawer, cold wax dish, ink pad, tied type slugs, shelves and tall window, the title on the brass edged label holder of the catalogue cabinet">
+<img src="scene.svg" alt="Animated scene in three bands: light and dust moving in the far band, drawers sliding and stopping in the middle band, a hand pressing the stamp once in the near band">
+<div><button type="button">Add the Outliers</button></div>
+<p><label>Number of Outliers</label> &nbsp; <label>Numerical Column</label></p>
+<section><h2><span class="plate">Plate 1.</span> The job</h2><p>Plausible outliers are injected into numerical columns so that distributions are distorted and genuine outliers are masked. The tool sits among programs that generate or mask sensitive data with values that look realistic while meaning nothing. The description names three inputs: count, column, and standard deviation multiplier. Those three are stated here as description claims, with a clear note that the parameters block documents none of them.</p></section>
+<section><h2><span class="plate">Plate 2.</span> Fetching, with an open repair</h2><p><code>git clone https://github.com/ShadowGuard-AI/dm-data-outlier-injector</code></p><p>The line above is labelled a correction. The README clone line uses the organisation name without its hyphen, a form that does not match the current account spelling, so the corrected direction above restores the hyphen. The corrected line is never passed off as the published line, and the published line stands unchanged in the preserved record at the foot of this page.</p></section>
+<section><h2><span class="plate">Plate 3.</span> The invocation shape</h2><p><code>./dm-data-outlier-injector [params]</code></p><p>That shape is the sole invocation the source offers, and the space around it is left empty on purpose. No invented example supplies a count, a column name from real data, or a multiplier value.</p></section>
+<section><h2><span class="plate">Plate 4.</span> The controls, candidly</h2><p>The one documented control is help: the flag <code>-h</code>, which shows the help message and exits.</p><div class="gap"><strong>The parameters gap, printed at full size:</strong> the description promises three arguments, count, column, and standard deviation multiplier, and the parameters block names none of them. No flag spelling, no ordering, and no default is given for any of the three in the source. That gap comes from the source, not from this site, and nothing on this page invents a flag name to close it.</div></section>
+<section><h2><span class="plate">Plate 5.</span> The output guard</h2><p>Output must not be input. When the resolved output path equals the resolved input path, refusal happens at exit 1 before any write, including when the same file is named through a ./ alias or a symlink.</p><div class="card">A card recording a refused run bears a small unstamped loan card mark in its corner.</div></section>
+<section><h2><span class="plate">Plate 6.</span> No Spread, No Outlier</h2><p>When a named column has zero or undefined standard deviation, covering a single row, a constant column, or a non numeric column, the run exits 1 with an error stating that no outlier can be drawn from a column with no spread, before any output is written. No sample column and no sample value is shown on this plate.</p></section>
+<section><h2><span class="plate">Plate 7.</span> Licence, kept in two parts</h2><p>First and apart stands the repo LICENSE file: MIT terms, its holder described by shape only, years spanning a stretch, a given name, a family name behind it, a shortened form in brackets that ends on one initial, and a handle following in brackets of its own. The holder line is not quoted here.</p><p>Second, labelled as the README record, stands the README closing line in its published unhyphenated organisation form: Copyright (c) ShadowGuardAI. The two credits are kept apart because their holder wordings differ in form and in spelling.</p></section>
+<section><h2>The desk at closing</h2><p>Beat five: stamp back on its rest, loan card filed into the drawer, drawer shut, edition complete and press at rest. Morning order answers morning order.</p></section>
+<section><h2>The preserved README record</h2><pre>![Banner](banner.png)
 
-<main>
-  <section class="rail">
-    <nav aria-label="on this page">
-      <p class="mono"><a href="#run">Run it</a><br>
-      <a href="#files">The files</a><br>
-      <a href="#sheets">The sheets</a><br>
-      <a href="https://github.com/ShadowGuard-AI/dm-data-outlier-injector">The repo</a></p>
-    </nav>
-    <div>
-      <p class="lede">Dm Data Outlier Injector is one of my projects. The README in the repo is short, so this page sticks to what the files themselves show.</p>
-      <div class="grid">
-        <div class="card pop"><h3>What it is</h3>
-          <p>Dm Data Outlier Injector: 5 files, 143 counted
-          lines across Python 125, Markdown 16, Text 2. One job, done in the
-          open, in files you can read.</p></div>
-        <div class="card pop"><h3>The biggest piece</h3>
-          <p><code>main.py</code> carries the most
-          lines. If the project grows, that file is where the growth
-          lands first, for better or worse.</p></div>
-        <div class="card pop"><h3>The honest gap</h3>
-          <p>No test files yet. That is the honest gap, and the roadmap in the visuals folder says what the first one should cover.</p></div>
-      </div>
-      <section id="run">
-        <h2>Run it</h2>
-        <p>The repo README has the exact commands for this one. The
-        shape is the shape for most of my projects: clone it, read the
-        top file first so you know what will happen, then run it on
-        something you do not mind breaking.</p>
-        <p class="mono">$ git clone https://github.com/ShadowGuard-AI/dm-data-outlier-injector.git<br>$ cd dm-data-outlier-injector</p>
-      </section>
-      
-  <section aria-label="real code">
-    <h2>The code, as it sits in the repo</h2>
-    <p>From <code>main.py</code>, line 8 on. I did
-    not tidy it for the page. What you see is what the file has.</p>
-    <pre class="code"><code>logging.basicConfig(level=logging.INFO, format=&#x27;%(asctime)s - %(levelname)s - %(message)s&#x27;)
+# dm-data-outlier-injector
+Injects statistically plausible outlier data points into numerical columns to distort distributions and mask genuine outliers. Takes number of outliers, column, and standard deviation multiplier as arguments. - Focused on Tools designed to generate or mask sensitive data with realistic-looking but meaningless values
 
-def setup_argparse():
-    &quot;&quot;&quot;
-    Sets up the argument parser for the command-line interface.
-    &quot;&quot;&quot;
-    parser = argparse.ArgumentParser(
-        description=&quot;Injects statistically plausible outlier data points into numerical columns to distort distributions and mask genuine outliers.&quot;
-    )
+## Install
+`git clone https://github.com/ShadowGuardAI/dm-data-outlier-injector`
 
-    parser.add_argument(&quot;input_file&quot;, help=&quot;Path to the input CSV file.&quot;)
-    parser.add_argument(&quot;output_file&quot;, help=&quot;Path to the output CSV file.&quot;)
-    parser.add_argument(&quot;column_name&quot;, help=&quot;Name of the column to inject outliers into.&quot;)
-    parser.add_argument(&quot;num_outliers&quot;, type=int, help=&quot;Number of outliers to inject.&quot;)
-    parser.add_argument(&quot;std_multiplier&quot;, type=float, help=&quot;Standard deviation multiplier for outlier generation.&quot;)
+## Usage
+`./dm-data-outlier-injector [params]`
 
-    return parser
+## Parameters
+- `-h`: Show help message and exit
 
-def inject_outliers(df, column_name, num_outliers, std_multiplier):
-    &quot;&quot;&quot;
-    Injects outlier data points into the specified column of the DataFrame.</code></pre>
-  </section>
-      <section id="files">
-        <h2>The files that matter</h2>
-        <table><tr><th>File</th><th>Lines</th></tr>
-        <tr><td><code>main.py</code></td><td>125</td></tr>
-        <tr><td><code>README.md</code></td><td>16</td></tr>
-        <tr><td><code>requirements.txt</code></td><td>2</td></tr>
-        <tr><td><code>banner.png</code></td><td>0</td></tr>
-        <tr><td><code>logo.png</code></td><td>0</td></tr>
-        </table>
-        <p>Names doing the work: <span class="mono">setup_argparse, inject_outliers, main</span>.</p>
-      </section>
-      <section id="sheets">
-        <h2>Drawn by hand</h2>
-        <p>I sketch my projects on notebook paper so I have to
-        understand them well enough to draw them. The full set,
-        with the counts and how they were counted, is the
-        <a href="https://github.com/ShadowGuard-AI/dm-data-outlier-injector/tree/main/dm-data-outlier-injector-Visuals">dm-data-outlier-injector-Visuals</a>
-        folder in the repo. Nothing is drawn over the binder holes.
-        That is a rule, not a style.</p>
-        <div class="shots">
-          <img src="assets/architecture.png" alt="Hand drawn architecture sheet for Dm Data Outlier Injector">
-          <img src="assets/flowchart.png" alt="Hand drawn flowchart sheet for Dm Data Outlier Injector">
-          <img src="assets/product-map.png" alt="Hand drawn product map sheet for Dm Data Outlier Injector">
-        </div>
-      </section>
-    </div>
-  </section>
-</main>
-<footer>
-  <p>Dm Data Outlier Injector is one of my projects. This page was written
-  from the repo itself on 2026-10-30: the counts are the
-  repo's counts, the code is the repo's code, and the gaps are the
-  repo's gaps.</p>
-</footer>
-</body>
-</html>
+## Output path and column spread
+
+The output file must not be the input file. If the resolved output path equals the resolved input path, the run refuses at exit 1 before any write, including when the same file is named through a ./ alias or a symlink.
+
+If the named column has no spread, meaning its standard deviation is zero or undefined (a single row, a constant column, or a non-numeric column), the run exits 1 with an error naming that no outlier can be drawn from a column with no spread, before writing any output.
+
+## License
+Copyright (c) ShadowGuardAI</pre></section>
+</main></body></html>

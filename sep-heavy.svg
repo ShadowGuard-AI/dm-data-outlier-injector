@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 40" role="img" aria-label="Major separator: index tabs along a full width rule, the line in neon coral from the banner palette and the tab shapes from the library desk">
+<line x1="0" y1="26" x2="1200" y2="26" stroke="#ff6b5e" stroke-width="3"/>
+<g stroke="#26201a" stroke-width="1.5"><rect x="180" y="4" width="34" height="22" fill="#3a2566"/><rect x="420" y="4" width="34" height="22" fill="#c0c6ce"/><rect x="660" y="4" width="34" height="22" fill="#7cf2c0"/><rect x="900" y="4" width="34" height="22" fill="#3a2566"/></g>
+<rect x="576" y="18" width="48" height="10" fill="#2f5d3a" stroke="#26201a"/><ellipse cx="600" cy="14" rx="9" ry="4" fill="#c9a227" stroke="#26201a"/>
+</svg>
