@@ -18,14 +18,14 @@ Injects statistically plausible outlier data points into numerical columns to di
 ![Major separator](sep-heavy.svg)
 
 ## Install
-`git clone https://github.com/ShadowGuardAI/dm-data-outlier-injector`
+`git clone https://github.com/ShadowGuard-AI/dm-data-outlier-injector`
 
 > Loan card: the clone line above keeps the organisation name in its published form, without its hyphen. It is preserved here exactly as printed. The website carries the corrected line, labelled as a correction.
 
 ![Minor separator](sep-light.svg)
 
 ## Usage
-`./dm-data-outlier-injector [params]`
+`python3 main.py input_file output_file column_name num_outliers std_multiplier [options]`
 
 > Loan card: the description names three arguments, count, column, and standard deviation multiplier, and the parameters block below documents none of them. No flag name, no order, and no default is invented here to close that gap.
 
@@ -51,7 +51,7 @@ If the named column has no spread, meaning its standard deviation is zero or und
 ![Minor separator](sep-light.svg)
 
 ## License
-Copyright (c) ShadowGuardAI
+This project is released under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 > Loan card: the closing line above keeps its published form, without its hyphen, and it stands apart from the repository LICENSE file, which holds MIT terms under a different holder wording.
 
